@@ -5,8 +5,11 @@ import java.util.Scanner;
 public class UserOperations {
     private Adress adress;
     private User user;
-    private ArrayList<User> users;
-    private Scanner scanner;
+    private UserPersonalData userPersonalData;
+    private UserContactData userContactData;
+    private UserLoginData userLoginData;
+    private final ArrayList<User> users;
+    private final Scanner scanner;
 
     UserOperations() {
         users = new ArrayList<>();
@@ -25,20 +28,23 @@ public class UserOperations {
         String dateOfBirth = scanner.nextLine();
         System.out.print("PESEL: ");
         String pesel = scanner.nextLine();
+        userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName, LocalDate.parse(dateOfBirth), pesel);
+
         System.out.print("Numer telefonu: ");
         String phoneNumber = scanner.nextLine();
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
         adress = createAdress();
+        userContactData = new UserContactData(phoneNumber, email, adress);
+
         System.out.print("\nLogin: ");
         String login = scanner.nextLine();
         System.out.print("Haslo: ");
         String password = scanner.nextLine();
+        userLoginData = new UserLoginData(login, password);
 
-        user = new User(firstName, lastName, mothersMaidenName, LocalDate.parse(dateOfBirth), pesel, phoneNumber, email, adress, login, password);
-
+        user = new User(userPersonalData, userContactData, userLoginData);
         addUser(user);
-
         System.out.println("Pomyslnie utworzono uzytkownika i dodano do bazy danych!");
     }
 
@@ -57,5 +63,9 @@ public class UserOperations {
 
     private void addUser(User user) {
         users.add(user);
+    }
+
+    public UserLoginData getUserLoginData() {
+        return userLoginData;
     }
 }
