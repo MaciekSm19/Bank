@@ -24,13 +24,19 @@ public class UserOperations {
         String lastName = scanner.nextLine();
         System.out.print("Nazwisko panienskie matki: ");
         String mothersMaidenName = scanner.nextLine();
-        System.out.print("Data urodzenia (RRRR-MM-DD): ");
-        String dateOfBirth = scanner.nextLine();
-        System.out.print("PESEL: ");
-        String pesel = scanner.nextLine();
-        userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName, LocalDate.parse(dateOfBirth), pesel);
+        userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName);
 
-        System.out.print("Numer telefonu: ");
+        System.out.print("PESEL: ");
+        String pesel;
+
+        do {
+            System.out.print("PESEL (11 cyfr): ");
+            pesel = scanner.nextLine();
+            userPersonalData.setPesel(pesel);
+        } while (!userPersonalData.validatePesel());
+        userPersonalData.convertPeselToDateOfBirth();
+
+        System.out.print("\nNumer telefonu: ");
         String phoneNumber = scanner.nextLine();
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
