@@ -15,8 +15,6 @@ public class User {
         this.userLoginData = userLoginData;
         user.put(userLoginData.getLogin(), userLoginData.getPassword());
     }
-
-
 }
 
 class UserPersonalData {
