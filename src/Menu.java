@@ -3,14 +3,13 @@ import java.util.Scanner;
 public class Menu {
     public void menu() {
         Scanner scanner = new Scanner(System.in);
-        UserOperations u = new UserOperations();
 
+        UserOperations u = new UserOperations();
         u.createUser();
 
-        System.out.println(u.getUserLoginData().getLogin());
         Account a = new Account(u.getUserLoginData().getLogin());
-        boolean loopController = true;
 
+        boolean loopController = true;
         do {
             System.out.println("Witaj w aplikacji banku! Wybierz, co chcesz zrobic:");
             System.out.println("1. Wplac pieniadze.");

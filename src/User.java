@@ -13,6 +13,7 @@ public class User {
         this.userPersonalData = userPersonalData;
         this.userContactData = userContactData;
         this.userLoginData = userLoginData;
+        user.put(userLoginData.getLogin(), userLoginData.getPassword());
     }
 }
 
