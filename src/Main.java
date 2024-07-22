@@ -4,5 +4,3 @@ public class Main {
         menu.menu();
     }
 }
-
-//sprawdzić, czy działa zabezpieczenie hasła
