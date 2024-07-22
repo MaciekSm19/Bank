@@ -3,11 +3,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    private UserPersonalData userPersonalData;
-    private UserContactData userContactData;
-    private UserLoginData userLoginData;
+    private final UserPersonalData userPersonalData;
+    private final UserContactData userContactData;
+    private final UserLoginData userLoginData;
 
-    static Map<String, String> user = new HashMap<String, String>();
+    static Map<String, String> user = new HashMap<>();
 
     public User(UserPersonalData userPersonalData, UserContactData userContactData, UserLoginData userLoginData) {
         this.userPersonalData = userPersonalData;
@@ -18,6 +18,14 @@ public class User {
 
     public UserLoginData getUserLoginData() {
         return userLoginData;
+    }
+
+    public UserPersonalData getUserPersonalData() {
+        return userPersonalData;
+    }
+
+    public UserContactData getUserContactData() {
+        return userContactData;
     }
 }
 
@@ -56,7 +64,7 @@ class UserPersonalData {
             maxDayValue = 30;
 
         boolean isValidLenght = pesel.length() == 11;
-        boolean isValidMonth = Character.getNumericValue(pesel.charAt(2)) <= 3 && (((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) && Character.getNumericValue(pesel.charAt(3)) <= 2) || (Character.getNumericValue(pesel.charAt(2)) <= 0 || Character.getNumericValue(pesel.charAt(3)) == 2));
+        boolean isValidMonth = Character.getNumericValue(pesel.charAt(2)) <= 3 && (((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) && Character.getNumericValue(pesel.charAt(3)) <= 2) || (Character.getNumericValue(pesel.charAt(2)) >= 0 || Character.getNumericValue(pesel.charAt(3)) == 2));
         boolean isValidDay = (Character.getNumericValue(pesel.charAt(4)) <= 3 && ((Character.getNumericValue(pesel.charAt(4)) == 3) && (Character.getNumericValue(pesel.charAt(5)) == 0) || Character.getNumericValue(pesel.charAt(5)) == 1) || ((Character.getNumericValue(pesel.charAt(4)) <= 2) && Character.getNumericValue(pesel.charAt(5)) >= 0)) && day <= maxDayValue;
 
         if (!isValidLenght) {
