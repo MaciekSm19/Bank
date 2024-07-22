@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class AccountMenu {
-    public void AccountMenu() {
+    public void accountMenu() {
         Scanner scanner = new Scanner(System.in);
         UserOperations u = new UserOperations();
 
@@ -16,10 +16,10 @@ public class AccountMenu {
 
             switch (choice) {
                 case 1:
-                    u.getUserInfo(u.users.get(0));
+                    u.getUserInfo(UserOperations.users.get(0));
                     break;
                 case 2:
-                    u.editUserData(u.users.get(0));
+                    u.editUserData(UserOperations.users.get(0));
                     break;
                 case 3:
                     System.out.println("Wracam do menu glowmnego.");

@@ -215,6 +215,7 @@ public class UserOperations {
                     user.getUserContactData().getAdress().setPostalCode(valueToSet);
                     break;
                 case 5:
+                    System.out.println("Wychodze do menu");
                     loopController = false;
                     break;
                 default:
