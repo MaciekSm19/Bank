@@ -34,52 +34,61 @@ class UserPersonalData {
         this.mothersMaidenName = mothersMaidenName;
     }
 
-    boolean validatePesel() {
-        if (pesel.length() == 11 &&
-                Character.getNumericValue(pesel.charAt(2)) <= 3 &&
-                (((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) &&
-                Character.getNumericValue(pesel.charAt(3)) <= 2) ||
-                (Character.getNumericValue(pesel.charAt(2)) <= 0 || Character.getNumericValue(pesel.charAt(3)) == 2)) &&
-                Character.getNumericValue(pesel.charAt(4)) <= 3 &&
-                ((Character.getNumericValue(pesel.charAt(4)) == 3) && (Character.getNumericValue(pesel.charAt(5)) == 0) || Character.getNumericValue(pesel.charAt(5)) == 1) || ((Character.getNumericValue(pesel.charAt(4)) <= 2) && Character.getNumericValue(pesel.charAt(5)) >= 0)) {
-            System.out.println("PESEL jest poprawny");
-            return true;
-        } else if (pesel.length() != 11){
+    boolean isValidPesel() {
+        int maxDayValue = 28;
+        int year = Integer.valueOf(String.valueOf(pesel.charAt(0)) + pesel.charAt(1));
+        int month = Integer.valueOf(String.valueOf(pesel.charAt(2)) + pesel.charAt(3));
+        int day = Integer.valueOf(String.valueOf(pesel.charAt(4)) + pesel.charAt(5));
+
+        if (month == 2 || month == 22) {
+            if (year % 4 == 0)
+                maxDayValue = 29;
+            else
+                maxDayValue = 28;
+        }
+        else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 1)
+            maxDayValue = 31;
+        else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 0)
+            maxDayValue = 30;
+        else if (((month >= 8  && month <= 12) || month >= 28) && month % 2 == 0)
+            maxDayValue = 31;
+        else if (((month >= 8  && month <= 12) || month >= 28) && month % 2 == 1)
+            maxDayValue = 30;
+
+        boolean isValidLenght = pesel.length() == 11;
+        boolean isValidMonth = Character.getNumericValue(pesel.charAt(2)) <= 3 && (((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) && Character.getNumericValue(pesel.charAt(3)) <= 2) || (Character.getNumericValue(pesel.charAt(2)) <= 0 || Character.getNumericValue(pesel.charAt(3)) == 2));
+        boolean isValidDay = (Character.getNumericValue(pesel.charAt(4)) <= 3 && ((Character.getNumericValue(pesel.charAt(4)) == 3) && (Character.getNumericValue(pesel.charAt(5)) == 0) || Character.getNumericValue(pesel.charAt(5)) == 1) || ((Character.getNumericValue(pesel.charAt(4)) <= 2) && Character.getNumericValue(pesel.charAt(5)) >= 0)) && day <= maxDayValue;
+
+        if (!isValidLenght) {
             System.out.println("Dlugosc numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
             return false;
-        } else if (!(Character.getNumericValue(pesel.charAt(2)) <= 3)) {
-            System.out.println("3 cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
-            return false;
-        } else if (!(((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) &&
-                Character.getNumericValue(pesel.charAt(3)) <= 2) ||
-                (Character.getNumericValue(pesel.charAt(2)) <= 0 || Character.getNumericValue(pesel.charAt(3)) == 2))){
-            System.out.println("4 cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
-            return false;
-        } else if (!(Character.getNumericValue(pesel.charAt(4)) <= 3)) {
-            System.out.println("5 cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
-            return false;
-        } else if (!(((Character.getNumericValue(pesel.charAt(4)) == 3) && (Character.getNumericValue(pesel.charAt(5)) == 0) || Character.getNumericValue(pesel.charAt(5)) == 1) || ((Character.getNumericValue(pesel.charAt(4)) <= 2) && Character.getNumericValue(pesel.charAt(5)) >= 0))) {
-            System.out.println("6 cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
-            return false;
-        } else {
-            System.out.println("Napotkano problem.");
+        }
+        if (!isValidMonth) {
+            System.out.println("3 lub 4 (zapis miesiaca urodzenia) cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
             return false;
         }
+        if (!isValidDay) {
+            System.out.println("5 lub 6 (zapis dnia urodzenia) cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
+            return false;
+        }
+        return isValidLenght && isValidMonth && isValidDay;
     }
 
     void convertPeselToDateOfBirth() {
         String year = null;
         String month = null;
 
-        if (Character.getNumericValue(pesel.charAt(2)) == 1) {
+        if (Character.getNumericValue(pesel.charAt(2)) == 1 || Character.getNumericValue(pesel.charAt(2)) == 0) {
             year = "19" + pesel.charAt(0) + pesel.charAt(1);
             month = String.valueOf(pesel.charAt(2)) + pesel.charAt(3);
         } else if(Character.getNumericValue(pesel.charAt(2)) == 2 || Character.getNumericValue(pesel.charAt(2)) == 3) {
             year = "20" + Character.getNumericValue(pesel.charAt(0)) + Character.getNumericValue(pesel.charAt(1));
-            month = String.valueOf((Character.getNumericValue(pesel.charAt(2)) + Character.getNumericValue(pesel.charAt(3)) - 20));
-            if (Integer.valueOf(month) < 10)
-                month = "0" + pesel.charAt(3);
+            month = String.valueOf(Integer.valueOf(String.valueOf(pesel.charAt(2)) + String.valueOf(pesel.charAt(3))) - 20);
+
         }
+
+        if (Integer.valueOf(month) < 10)
+            month = "0" + pesel.charAt(3);
 
         String day = String.valueOf(pesel.charAt(4)) + pesel.charAt(5);
         if (day != null && month != null && year != null) {
