@@ -11,10 +11,7 @@ public class Account {
     }
 
     boolean checkIfUserExists(String ownersLogin) {
-        if (User.user.containsKey(ownersLogin))
-            return true;
-        else
-            return false;
+        return User.user.containsKey(ownersLogin);
     }
 
     void withdrawMoney() {
@@ -44,5 +41,41 @@ public class Account {
 
     public String getOwnersLogin() {
         return ownersLogin;
+    }
+
+    boolean loginToAccount(User user) {
+        String login;
+        String password;
+
+        do {
+            System.out.print("Podaj Twoj login: ");
+            login = scanner.nextLine();
+            if (!checkIfUserExists(login))
+                System.out.println("Nie znaleziono takiego uzytkownika. Sprobuj ponownie.");
+        } while (!checkIfUserExists(login));
+
+        int counter = 0;
+        do {
+            counter++;
+            System.out.print("Podaj Twoje haslo: ");
+            password = scanner.nextLine();
+            if (!(password.equals(user.getUserLoginData().getPassword()))) {
+                System.out.println("Haslo jest niepoprawne. Sprobuj jeszcze raz.");
+            } else {
+                break;
+            }
+
+            if (counter == 5) {
+                System.out.println("Liczba prob przekroczona - odmowa dostepu.");
+                break;
+            }
+        } while (!(login.equals(user.getUserLoginData().getLogin()) && password.equals(user.getUserLoginData().getPassword())) || counter < 5);
+
+        if (login.equals(user.getUserLoginData().getLogin()) && password.equals(user.getUserLoginData().getPassword())) {
+            System.out.println("Zalogowano pomyślnie");
+            return true;
+        } else {
+            return false;
+        }
     }
 }

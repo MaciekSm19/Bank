@@ -63,11 +63,11 @@ class UserPersonalData {
         else if (((month >= 8  && month <= 12) || month >= 28) && month % 2 == 1)
             maxDayValue = 30;
 
-        boolean isValidLenght = pesel.length() == 11;
+        boolean isValidLength = pesel.length() == 11;
         boolean isValidMonth = Character.getNumericValue(pesel.charAt(2)) <= 3 && (((Character.getNumericValue(pesel.charAt(2)) == 0 || Character.getNumericValue(pesel.charAt(2)) == 1) && Character.getNumericValue(pesel.charAt(3)) <= 2) || (Character.getNumericValue(pesel.charAt(2)) >= 0 || Character.getNumericValue(pesel.charAt(3)) == 2));
         boolean isValidDay = (Character.getNumericValue(pesel.charAt(4)) <= 3 && ((Character.getNumericValue(pesel.charAt(4)) == 3) && (Character.getNumericValue(pesel.charAt(5)) == 0) || Character.getNumericValue(pesel.charAt(5)) == 1) || ((Character.getNumericValue(pesel.charAt(4)) <= 2) && Character.getNumericValue(pesel.charAt(5)) >= 0)) && day <= maxDayValue;
 
-        if (!isValidLenght) {
+        if (!isValidLength) {
             System.out.println("Dlugosc numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
             return false;
         }
@@ -79,7 +79,7 @@ class UserPersonalData {
             System.out.println("5 lub 6 (zapis dnia urodzenia) cyfra numeru PESEL jest niepoprawna. Sprobuj jeszcze raz.");
             return false;
         }
-        return isValidLenght && isValidMonth && isValidDay;
+        return isValidLength && isValidMonth && isValidDay;
     }
 
     void convertPeselToDateOfBirth() {

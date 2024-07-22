@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ public class UserOperations {
     private UserPersonalData userPersonalData;
     private UserContactData userContactData;
     private UserLoginData userLoginData;
-    private final ArrayList<User> users;
+     final ArrayList<User> users;
     private final Scanner scanner;
 
     UserOperations() {
@@ -17,7 +16,7 @@ public class UserOperations {
     }
 
     void createUser() {
-        System.out.println("Witaj w kreatorze uzytkownika. Musisz podac niezbedne dane, aby zarejestrowac sie w aplikacji baku.\n");
+        System.out.println("\nWitaj w kreatorze uzytkownika. Musisz podac niezbedne dane, aby zarejestrowac sie w aplikacji baku.\n");
         System.out.print("Imie: ");
         String firstName = scanner.nextLine();
         System.out.print("Nazwisko: ");
@@ -26,14 +25,13 @@ public class UserOperations {
         String mothersMaidenName = scanner.nextLine();
         userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName);
 
-        System.out.print("PESEL: ");
         String pesel;
 
         do {
             System.out.print("PESEL (11 cyfr): ");
             pesel = scanner.nextLine();
             userPersonalData.setPesel(pesel);
-        } while (!userPersonalData.validatePesel());
+        } while (!userPersonalData.isValidPesel());
         userPersonalData.convertPeselToDateOfBirth();
 
         System.out.print("\nNumer telefonu: ");
