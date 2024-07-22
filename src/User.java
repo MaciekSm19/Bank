@@ -32,7 +32,7 @@ public class User {
 class UserPersonalData {
     private String firstName;
     private String lastName;
-    private String mothersMaidenName;
+    private final String mothersMaidenName;
     private LocalDate dateOfBirth;
     private String pesel;
 
@@ -44,9 +44,9 @@ class UserPersonalData {
 
     boolean isValidPesel() {
         int maxDayValue = 28;
-        int year = Integer.valueOf(String.valueOf(pesel.charAt(0)) + pesel.charAt(1));
-        int month = Integer.valueOf(String.valueOf(pesel.charAt(2)) + pesel.charAt(3));
-        int day = Integer.valueOf(String.valueOf(pesel.charAt(4)) + pesel.charAt(5));
+        int year = Integer.parseInt(String.valueOf(pesel.charAt(0)) + pesel.charAt(1));
+        int month = Integer.parseInt(String.valueOf(pesel.charAt(2)) + pesel.charAt(3));
+        int day = Integer.parseInt(String.valueOf(pesel.charAt(4)) + pesel.charAt(5));
 
         if (month == 2 || month == 22) {
             if (year % 4 == 0)
@@ -106,6 +106,10 @@ class UserPersonalData {
             System.out.println("Wystapil blad w konwersji");
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -120,10 +124,6 @@ class UserPersonalData {
 
     public String getMothersMaidenName() {
         return mothersMaidenName;
-    }
-
-    public void setMothersMaidenName(String mothersMaidenName) {
-        this.mothersMaidenName = mothersMaidenName;
     }
 
     public LocalDate getDateOfBirth() {

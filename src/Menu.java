@@ -7,10 +7,12 @@ public class Menu {
         UserOperations u = new UserOperations();
         u.createUser();
 
-        Account a = new Account(u.getUserLoginData().getLogin());
+        Account account = new Account();
+
+        AccountMenu accountMenu = new AccountMenu();
 
         System.out.println("\nZaloguj sie do aplikacji.");
-        boolean isLoginToAccount = a.loginToAccount(u.users.getFirst());
+        boolean isLoginToAccount = account.loginToAccount(u.users.getFirst());
 
         if (isLoginToAccount) {
             boolean loopController = true;
@@ -18,18 +20,22 @@ public class Menu {
                 System.out.println("\nWitaj w aplikacji banku! Wybierz, co chcesz zrobic:");
                 System.out.println("1. Wplac pieniadze.");
                 System.out.println("2. Wyplac.");
-                System.out.println("3. Wyjdz z aplikacji.");
+                System.out.println("3. Konto.");
+                System.out.println("4. Wyjdz z aplikacji.");
                 System.out.print("Twoj wybor: ");
                 int choice = scanner.nextInt();
 
                 switch (choice) {
                     case 1:
-                        a.depositMoney();
+                        account.depositMoney(u.users.get(0));
                         break;
                     case 2:
-                        a.withdrawMoney();
+                        account.withdrawMoney(u.users.get(0));
                         break;
                     case 3:
+                        accountMenu.AccountMenu();
+                        break;
+                    case 4:
                         System.out.println("Dziekuje za skorzystanie z aplikacji!");
                         loopController = false;
                         break;
