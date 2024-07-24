@@ -1,12 +1,43 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <pre> Class <code>UserOperations</code> operates at user's data. </pre>
+ *
+ * @author macieksm19
+ * @version 1.0
+ * @since 2024-07-23
+ */
+
 public class UserOperations {
-    private Adress adress;
+    /**
+     * @see <code>Address</code>
+     */
+    private Address adress;
+
+    /**
+     * @see <code>User</code>
+     */
     private User user;
+
+    /**
+     * @see <code>UserPersonalData</code>
+     */
     private UserPersonalData userPersonalData;
+
+    /**
+     * @see <code>UserContactData</code>
+     */
     private UserContactData userContactData;
+
+    /**
+     * @see <code>UserLoginData</code>
+     */
     private UserLoginData userLoginData;
+
+    /**
+     * Contains created users
+     */
     static ArrayList<User> users = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
 
@@ -25,7 +56,7 @@ public class UserOperations {
         do {
             System.out.print("PESEL (11 cyfr): ");
             pesel = scanner.nextLine();
-            userPersonalData.setPesel(pesel);
+            userPersonalData.setPeselNumber(pesel);
         } while (!userPersonalData.isValidPesel());
         userPersonalData.convertPeselToDateOfBirth();
 
@@ -47,7 +78,7 @@ public class UserOperations {
         System.out.println("Pomyslnie utworzono uzytkownika i dodano do bazy danych!");
     }
 
-    private Adress createAdress() {
+    private Address createAdress() {
         System.out.print("\nMiejscowosc: ");
         String city = scanner.nextLine();
         System.out.print("Ulica: ");
@@ -57,47 +88,32 @@ public class UserOperations {
         System.out.print("Kod pocztowy: ");
         String postalCode = scanner.nextLine();
 
-        return new Adress(city, street, houseNumber, postalCode);
+        return new Address(city, street, houseNumber, postalCode);
     }
 
+    /**
+     * <pre> Adds userLoginAndPassword to <code>users</code> </pre>
+     * @param user  userLoginAndPassword to add to <code>users</code>
+     */
     private void addUser(User user) {
         users.add(user);
     }
 
+    /**
+     * Gets details about userLoginAndPassword
+     * @param user  userLoginAndPassword to get information about this userLoginAndPassword
+     */
     void getUserInfo(User user) {
         getUserPersonalDataInfo(user);
-        getUserConcactData(user);
-        getUserAdress(user);
+        getUserContactData(user);
+        getUserAddress(user);
         getLoginData(user);
     }
 
-    private void getLoginData(User user) {
-        System.out.println("\nDane logowania: " );
-        System.out.println("Login: " + user.getUserLoginData().getLogin());
-        System.out.println("Haslo: *********");
-    }
-
-    private void getUserAdress(User user) {
-        System.out.println("\nAdres: ");
-        System.out.println("Miasto: " + user.getUserContactData().getAdress().getCity());
-        System.out.println("Ulica i numer domu: " + user.getUserContactData().getAdress().getStreet() + " " + user.getUserContactData().getAdress().getHouseNumber());
-        System.out.println("Kod pocztowy: " + user.getUserContactData().getAdress().getPostalCode());
-    }
-
-    private void getUserConcactData(User user) {
-        System.out.println("\nDane kontaktowe: " );
-        System.out.println("Adres e-mail: " + user.getUserContactData().getEmail());
-        System.out.println("Numer telefonu: " + user.getUserContactData().getPhoneNumber());
-    }
-
-    private void getUserPersonalDataInfo(User user) {
-        System.out.println("\nDane osobowe: " );
-        System.out.println("Imie i nazwisko: " + user.getUserPersonalData().getFirstName() + " " + user.getUserPersonalData().getLastName());
-        System.out.println("Nazwisko panienskie matki: *************");
-        System.out.println("Data urodzenia: " + user.getUserPersonalData().getDateOfBirth());
-        System.out.println("PESEL: *************");
-    }
-
+    /**
+     * <pre> Edits information about userLoginAndPassword </pre>
+     * @param user  userLoginAndPassword to edit information about this userLoginAndPassword
+     */
     void editUserData(User user) {
         boolean loopController = true;
         do {
@@ -142,7 +158,7 @@ public class UserOperations {
                     user.getUserContactData().setEmail(valueToSet);
                     break;
                 case 5:
-                    editUserAdress(user);
+                    editUserAddress(user);
                     break;
                 case 6:
                     System.out.println("Twoj login: " + user.getUserLoginData().getLogin());
@@ -174,7 +190,11 @@ public class UserOperations {
         } while(loopController);
     }
 
-    private void editUserAdress(User user) {
+    /**
+     * <pre> Edits information about userLoginAndPassword address </pre>
+     * @param user  userLoginAndPassword to edit information about this userLoginAndPassword
+     */
+    private void editUserAddress(User user) {
         System.out.println("\nKtore dane chcesz edytowac?");
         boolean loopController = true;
         do {
@@ -191,28 +211,28 @@ public class UserOperations {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Twoje miasto: " + user.getUserContactData().getAdress().getCity());
+                    System.out.println("Twoje miasto: " + user.getUserContactData().getAddress().getCity());
                     System.out.print("Podaj nowe miasto: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAdress().setCity(valueToSet);
+                    user.getUserContactData().getAddress().setCity(valueToSet);
                     break;
                 case 2:
-                    System.out.println("Twoja ulica: " + user.getUserContactData().getAdress().getStreet());
+                    System.out.println("Twoja ulica: " + user.getUserContactData().getAddress().getStreet());
                     System.out.print("Podaj nowa ulice: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAdress().setStreet(valueToSet);
+                    user.getUserContactData().getAddress().setStreet(valueToSet);
                     break;
                 case 3:
-                    System.out.println("Twoj numer domu: " + user.getUserContactData().getAdress().getHouseNumber());
+                    System.out.println("Twoj numer domu: " + user.getUserContactData().getAddress().getHouseNumber());
                     System.out.print("Podaj nowy numer domu: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAdress().setHouseNumber(valueToSet);
+                    user.getUserContactData().getAddress().setHouseNumber(valueToSet);
                     break;
                 case 4:
-                    System.out.println("Twoj kod pocztowy: " + user.getUserContactData().getAdress().getPostalCode());
+                    System.out.println("Twoj kod pocztowy: " + user.getUserContactData().getAddress().getPostalCode());
                     System.out.print("Podaj nowy kod pocztowy: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAdress().setPostalCode(valueToSet);
+                    user.getUserContactData().getAddress().setPostalCode(valueToSet);
                     break;
                 case 5:
                     System.out.println("Wychodze do menu");
@@ -223,5 +243,32 @@ public class UserOperations {
                     break;
             }
         } while (loopController);
+    }
+
+    private void getLoginData(User user) {
+        System.out.println("\nDane logowania: " );
+        System.out.println("Login: " + user.getUserLoginData().getLogin());
+        System.out.println("Haslo: *********");
+    }
+
+    private void getUserAddress(User user) {
+        System.out.println("\nAdres: ");
+        System.out.println("Miasto: " + user.getUserContactData().getAddress().getCity());
+        System.out.println("Ulica i numer domu: " + user.getUserContactData().getAddress().getStreet() + " " + user.getUserContactData().getAddress().getHouseNumber());
+        System.out.println("Kod pocztowy: " + user.getUserContactData().getAddress().getPostalCode());
+    }
+
+    private void getUserContactData(User user) {
+        System.out.println("\nDane kontaktowe: " );
+        System.out.println("Adres e-mail: " + user.getUserContactData().getEmail());
+        System.out.println("Numer telefonu: " + user.getUserContactData().getPhoneNumber());
+    }
+
+    private void getUserPersonalDataInfo(User user) {
+        System.out.println("\nDane osobowe: " );
+        System.out.println("Imie i nazwisko: " + user.getUserPersonalData().getFirstName() + " " + user.getUserPersonalData().getLastName());
+        System.out.println("Nazwisko panienskie matki: *************");
+        System.out.println("Data urodzenia: " + user.getUserPersonalData().getDateOfBirth());
+        System.out.println("PESEL: *************");
     }
 }
