@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.math.BigDecimal;
 
-public class Account {
+public class Account implements Comparable {
     private final Scanner scanner = new Scanner(System.in);
-    private double balance = 0;
+    private BigDecimal balance = new BigDecimal(0);
 
     boolean checkIfUserExists(String login) {
         return User.userLoginAndPassword.containsKey(login);
@@ -11,11 +12,11 @@ public class Account {
     void withdrawMoney(User user) {
         if (checkIfUserExists(user.getUserLoginData().getLogin())) {
             System.out.print("Ile pieniędzy chcesz wypłacić? ");
-            double amount = scanner.nextDouble();
-            if (amount > balance)
+            BigDecimal amount = scanner.nextBigDecimal();
+            if (balance.compareTo(amount) < 0)
                 System.out.println("Odmowa! Masz za malo pieniędzy na koncie (" + balance + " zl), aby wypłacić " + amount + " zl");
-            else if (amount <= balance) {
-                balance -= amount;
+            else if (balance.compareTo(amount) >= 0) {
+                balance = balance.subtract(amount);
                 System.out.println("Wyplata zatwierdzona! Obecny stan konta wynosi: " + balance);
             } else
                 System.out.println("Odmowa! Wystąpił błąd");
@@ -26,8 +27,8 @@ public class Account {
     void depositMoney(User user) {
         if (checkIfUserExists(user.getUserLoginData().getLogin())) {
             System.out.print("Ile pieniędzy chcesz wpłacić? ");
-            double amount = scanner.nextDouble();
-            balance += amount;
+            BigDecimal amount = scanner.nextBigDecimal();
+            balance = balance.add(amount);
             System.out.println("Wplata zatwierdzona! Obecny stan konta wynosi: " + balance);
         } else
             System.out.println("Nie można wykonać tej operacji.");
@@ -67,5 +68,10 @@ public class Account {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.balance.compareTo((BigDecimal) o);
     }
 }
