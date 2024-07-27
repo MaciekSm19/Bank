@@ -17,12 +17,12 @@ public class Menu {
         if (isLoginToAccount) {
             boolean loopController = true;
             do {
-                System.out.println("\nWitaj w aplikacji banku! Wybierz, co chcesz zrobic:");
-                System.out.println("1. Wplac pieniadze.");
-                System.out.println("2. Wyplac.");
+                System.out.println("\nWitaj w aplikacji banku! Wybierz, co chcesz zrobić:");
+                System.out.println("1. Wpłać pieniądze.");
+                System.out.println("2. Wypłać.");
                 System.out.println("3. Konto.");
-                System.out.println("4. Wyjdz z aplikacji.");
-                System.out.print("Twoj wybor: ");
+                System.out.println("4. Wyjdź z aplikacji.");
+                System.out.print("Twój wybór: ");
                 int choice = scanner.nextInt();
 
                 switch (choice) {
@@ -36,11 +36,11 @@ public class Menu {
                         accountMenu.accountMenu();
                         break;
                     case 4:
-                        System.out.println("Dziekuje za skorzystanie z aplikacji!");
+                        System.out.println("Dziękuje za skorzystanie z aplikacji!");
                         loopController = false;
                         break;
                     default:
-                        System.out.println("Wystapil blad!");
+                        System.out.println("Wystąpił błąd!");
                         loopController = false;
                         break;
                 }

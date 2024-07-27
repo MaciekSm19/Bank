@@ -7,11 +7,11 @@ public class AccountMenu {
 
         boolean loopController = true;
         do {
-            System.out.println("\nWitaj w menu konta. Co chcesz zrobic?");
-            System.out.println("1. Wyswietl informacje.");
+            System.out.println("\nWitaj w menu konta. Co chcesz zrobić?");
+            System.out.println("1. Wyświetl informacje.");
             System.out.println("2. Edytuj dane.");
-            System.out.println("3. Wyjdz do menu glownego.");
-            System.out.print("Twoj wybor: ");
+            System.out.println("3. Wyjdź do menu głównego.");
+            System.out.print("Twój wybór: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -22,7 +22,7 @@ public class AccountMenu {
                     u.editUserData(UserOperations.users.get(0));
                     break;
                 case 3:
-                    System.out.println("Wracam do menu glowmnego.");
+                    System.out.println("Wracam do menu głównego.");
                     loopController = false;
                     break;
             }
