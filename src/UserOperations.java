@@ -7,7 +7,7 @@ public class UserOperations {
     private UserPersonalData userPersonalData;
     private UserContactData userContactData;
     private UserLoginData userLoginData;
-    static ArrayList<User> users = new ArrayList<>(); //naprawic
+    static ArrayList<User> users = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
 
     void createUser() {
