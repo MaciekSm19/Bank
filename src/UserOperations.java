@@ -41,31 +41,12 @@ public class UserOperations {
         addUser(user);
         System.out.println("Pomyślnie utworzono użytkownika i dodano do bazy danych!");
     }
-
-    private Address createAddress() {
-        System.out.print("\nMiejscowość: ");
-        String city = scanner.nextLine();
-        System.out.print("Ulica: ");
-        String street = scanner.nextLine();
-        System.out.print("Numer domu: ");
-        String houseNumber = scanner.nextLine();
-        System.out.print("Kod pocztowy: ");
-        String postalCode = scanner.nextLine();
-
-        return new Address(city, street, houseNumber, postalCode);
-    }
-
-    private void addUser(User user) {
-        users.add(user);
-    }
-
     void getUserInfo(User user) {
         getUserPersonalDataInfo(user);
         getUserContactData(user);
         getUserAddress(user);
         getLoginData(user);
     }
-
     void editUserData(User user) {
         boolean loopController = true;
         do {
@@ -141,7 +122,21 @@ public class UserOperations {
             }
         } while (loopController);
     }
+    private Address createAddress() {
+        System.out.print("\nMiejscowość: ");
+        String city = scanner.nextLine();
+        System.out.print("Ulica: ");
+        String street = scanner.nextLine();
+        System.out.print("Numer domu: ");
+        String houseNumber = scanner.nextLine();
+        System.out.print("Kod pocztowy: ");
+        String postalCode = scanner.nextLine();
 
+        return new Address(city, street, houseNumber, postalCode);
+    }
+    private void addUser(User user) {
+        users.add(user);
+    }
     private void editUserAddress(User user) {
         System.out.println("\nKtóre dane chcesz edytować?");
         boolean loopController = true;
@@ -192,26 +187,22 @@ public class UserOperations {
             }
         } while (loopController);
     }
-
     private void getLoginData(User user) {
         System.out.println("\nDane logowania: ");
         System.out.println("Login: " + user.credentials().getLogin());
         System.out.println("Hasło: *********");
     }
-
     private void getUserAddress(User user) {
         System.out.println("\nAdres: ");
         System.out.println("Miasto: " + user.userContact().getAddress().getCity());
         System.out.println("Ulica i numer domu: " + user.userContact().getAddress().getStreet() + " " + user.userContact().getAddress().getHouseNumber());
         System.out.println("Kod pocztowy: " + user.userContact().getAddress().getPostalCode());
     }
-
     private void getUserContactData(User user) {
         System.out.println("\nDane kontaktowe: ");
         System.out.println("Adres e-mail: " + user.userContact().getEmail());
         System.out.println("Numer telefonu: " + user.userContact().getPhoneNumber());
     }
-
     private void getUserPersonalDataInfo(User user) {
         System.out.println("\nDane osobowe: ");
         System.out.println("Imie i nazwisko: " + user.userPersonalData().getFirstName() + " " + user.userPersonalData().getLastName());
@@ -219,5 +210,4 @@ public class UserOperations {
         System.out.println("Data urodzenia: " + user.userPersonalData().getDateOfBirth());
         System.out.println("PESEL: *************");
     }
-
 }

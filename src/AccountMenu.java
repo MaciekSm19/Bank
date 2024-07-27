@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class AccountMenu {
-    UserOperations userOperations;
+    private final UserOperations userOperations;
 
     AccountMenu (UserOperations userOperations) {
         this.userOperations = userOperations;

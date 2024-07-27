@@ -4,17 +4,16 @@ import java.math.BigDecimal;
 public class Account implements Comparable {
     private final Scanner scanner = new Scanner(System.in);
     private BigDecimal balance = new BigDecimal(0);
-    UserOperations userOperations;
+    private final UserOperations userOperations;
     
     Account(UserOperations userOperations) {
         this.userOperations = userOperations;
     }
-    
-    
-    boolean checkIfUserExists(String login) {
-        return !userOperations.users.get(0).credentials().getLogin().equals(login);
-    }
 
+    @Override
+    public int compareTo(Object o) {
+        return this.balance.compareTo((BigDecimal) o);
+    }
     void withdrawMoney() {
         System.out.print("Ile pieniędzy chcesz wypłacić? ");
         BigDecimal amount = scanner.nextBigDecimal();
@@ -26,14 +25,12 @@ public class Account implements Comparable {
         } else
             System.out.println("Odmowa! Wystąpił błąd");
     }
-
     void depositMoney() {
         System.out.print("Ile pieniędzy chcesz wpłacić? ");
         BigDecimal amount = scanner.nextBigDecimal();
         balance = balance.add(amount);
         System.out.println("Wplata zatwierdzona! Obecny stan konta wynosi: " + balance);
     }
-
     boolean loginToAccount() {
         String login;
         String password;
@@ -69,9 +66,7 @@ public class Account implements Comparable {
             return false;
         }
     }
-
-    @Override
-    public int compareTo(Object o) {
-        return this.balance.compareTo((BigDecimal) o);
+    private boolean checkIfUserExists(String login) {
+        return !userOperations.users.get(0).credentials().getLogin().equals(login);
     }
 }
