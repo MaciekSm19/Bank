@@ -12,7 +12,7 @@ public class Menu {
         AccountMenu accountMenu = new AccountMenu();
 
         System.out.println("\nZaloguj sie do aplikacji.");
-        boolean isLoginToAccount = account.loginToAccount(UserOperations.users.getFirst());
+        boolean isLoginToAccount = account.loginToAccount(userOperations.users.getFirst());
 
         if (isLoginToAccount) {
             boolean loopController = true;
@@ -27,10 +27,10 @@ public class Menu {
 
                 switch (choice) {
                     case 1:
-                        account.depositMoney(UserOperations.users.get(0));
+                        account.depositMoney(userOperations.users.get(0));
                         break;
                     case 2:
-                        account.withdrawMoney(UserOperations.users.get(0));
+                        account.withdrawMoney(userOperations.users.get(0));
                         break;
                     case 3:
                         accountMenu.accountMenu();

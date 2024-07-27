@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class AccountMenu {
     public void accountMenu() {
         Scanner scanner = new Scanner(System.in);
-        UserOperations u = new UserOperations();
+        UserOperations userOperations = new UserOperations();
 
         boolean loopController = true;
         do {
@@ -16,10 +16,10 @@ public class AccountMenu {
 
             switch (choice) {
                 case 1:
-                    u.getUserInfo(UserOperations.users.get(0));
+                    userOperations.getUserInfo(userOperations.users.get(0));
                     break;
                 case 2:
-                    u.editUserData(UserOperations.users.get(0));
+                    userOperations.editUserData(userOperations.users.get(0));
                     break;
                 case 3:
                     System.out.println("Wracam do menu głównego.");

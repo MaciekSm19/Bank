@@ -3,18 +3,18 @@ import java.util.Map;
 
 public class User {
     private final UserPersonalData userPersonalData;
-    private final UserContactData userContactData;
-    private final UserLoginData userLoginData;
+    private final UserContact userContactData;
+    private final Credentials userLoginData;
     static Map<String, String> userLoginAndPassword = new HashMap<>();
 
-    public User(UserPersonalData userPersonalData, UserContactData userContactData, UserLoginData userLoginData) {
+    public User(UserPersonalData userPersonalData, UserContact userContactData, Credentials userLoginData) {
         this.userPersonalData = userPersonalData;
         this.userContactData = userContactData;
         this.userLoginData = userLoginData;
         userLoginAndPassword.put(userLoginData.getLogin(), userLoginData.getPassword());
     }
 
-    public UserLoginData getUserLoginData() {
+    public Credentials getUserLoginData() {
         return userLoginData;
     }
 
@@ -22,7 +22,7 @@ public class User {
         return userPersonalData;
     }
 
-    public UserContactData getUserContactData() {
+    public UserContact getUserContactData() {
         return userContactData;
     }
 }
