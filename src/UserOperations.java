@@ -1,48 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * <pre> Class <code>UserOperations</code> operates at user's data. </pre>
- *
- * @author macieksm19
- * @version 1.0
- * @since 2024-07-23
- */
-
 public class UserOperations {
-    /**
-     * @see <code>Address</code>
-     */
-    private Address adress;
-
-    /**
-     * @see <code>User</code>
-     */
+    private Address address;
     private User user;
-
-    /**
-     * @see <code>UserPersonalData</code>
-     */
     private UserPersonalData userPersonalData;
-
-    /**
-     * @see <code>UserContactData</code>
-     */
     private UserContactData userContactData;
-
-    /**
-     * @see <code>UserLoginData</code>
-     */
     private UserLoginData userLoginData;
-
-    /**
-     * Contains created users
-     */
-    static ArrayList<User> users = new ArrayList<>();
+    static ArrayList<User> users = new ArrayList<>(); //naprawic
     private final Scanner scanner = new Scanner(System.in);
 
     void createUser() {
-        System.out.println("\nWitaj w kreatorze uzytkownika. Musisz podac niezbedne dane, aby zarejestrowac sie w aplikacji baku.\n");
+        System.out.println("\nWitaj w kreatorze uzytkownika. Musisz podac niezbedne dane, aby zarejestrowac sie w aplikacji banku.\n");
         System.out.print("Imie: ");
         String firstName = scanner.nextLine();
         System.out.print("Nazwisko: ");
@@ -64,8 +33,8 @@ public class UserOperations {
         String phoneNumber = scanner.nextLine();
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
-        adress = createAdress();
-        userContactData = new UserContactData(phoneNumber, email, adress);
+        address = createAdress();
+        userContactData = new UserContactData(phoneNumber, email, address);
 
         System.out.print("\nLogin: ");
         String login = scanner.nextLine();
@@ -91,18 +60,10 @@ public class UserOperations {
         return new Address(city, street, houseNumber, postalCode);
     }
 
-    /**
-     * <pre> Adds userLoginAndPassword to <code>users</code> </pre>
-     * @param user  userLoginAndPassword to add to <code>users</code>
-     */
     private void addUser(User user) {
         users.add(user);
     }
 
-    /**
-     * Gets details about userLoginAndPassword
-     * @param user  userLoginAndPassword to get information about this userLoginAndPassword
-     */
     void getUserInfo(User user) {
         getUserPersonalDataInfo(user);
         getUserContactData(user);
@@ -110,10 +71,6 @@ public class UserOperations {
         getLoginData(user);
     }
 
-    /**
-     * <pre> Edits information about userLoginAndPassword </pre>
-     * @param user  userLoginAndPassword to edit information about this userLoginAndPassword
-     */
     void editUserData(User user) {
         boolean loopController = true;
         do {
@@ -190,10 +147,6 @@ public class UserOperations {
         } while(loopController);
     }
 
-    /**
-     * <pre> Edits information about userLoginAndPassword address </pre>
-     * @param user  userLoginAndPassword to edit information about this userLoginAndPassword
-     */
     private void editUserAddress(User user) {
         System.out.println("\nKtore dane chcesz edytowac?");
         boolean loopController = true;

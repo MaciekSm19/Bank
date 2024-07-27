@@ -1,23 +1,6 @@
 import java.util.Scanner;
 
-/**
- * <pre> Class <code>Menu</code> displays application's menu. </pre>
- *
- * @author macieksm19
- * @version 1.0
- * @since 2024-07-23
- */
 public class Menu {
-
-    /**
-     * <pre>Displays application menu options. Ask user for insert a number of an option: </pre>
-     * <ol>
-     *     <li>Deposit money - launches <code>depositMoney</code> method. @see <code>UserOperations#depositMoney</code></li>
-     *     <li>Withdraw money - launches <code>withdrawMoney</code> method. @see <code>UserOperations#withdrawMoney</code></li>
-     *     <li>Account - launches <code>accountMenu</code> method. @see <code>AccountMenu#accountMenu</code></li>
-     *     <li>Exit the application - exits the application </li>
-     * </ol>
-     */
     public void menu() {
         Scanner scanner = new Scanner(System.in);
 
