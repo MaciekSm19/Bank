@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserOperations {
-    static ArrayList<User> users = new ArrayList<>();
+    ArrayList<User> users = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
 
     void createUser() {
@@ -29,13 +29,13 @@ public class UserOperations {
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
         Address address = createAddress();
-        UserContactData userContactData = new UserContactData(phoneNumber, email, address);
+        UserContact userContactData = new UserContact(phoneNumber, email, address);
 
         System.out.print("\nLogin: ");
         String login = scanner.nextLine();
         System.out.print("Hasło: ");
         String password = scanner.nextLine();
-        UserLoginData userLoginData = new UserLoginData(login, password);
+        Credentials userLoginData = new Credentials(login, password);
 
         User user = new User(userPersonalData, userContactData, userLoginData);
         addUser(user);
