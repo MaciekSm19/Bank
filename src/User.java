@@ -5,7 +5,7 @@ public class User {
     private final UserPersonalData userPersonalData;
     private final UserContactData userContactData;
     private final UserLoginData userLoginData;
-    static Map<String, String> userLoginAndPassword = new HashMap<>(); //naprawić
+    static Map<String, String> userLoginAndPassword = new HashMap<>();
 
     public User(UserPersonalData userPersonalData, UserContactData userContactData, UserLoginData userLoginData) {
         this.userPersonalData = userPersonalData;

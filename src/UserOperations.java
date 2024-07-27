@@ -2,12 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserOperations {
-    private Address address;
-    private User user;
-    private UserPersonalData userPersonalData;
-    private UserContactData userContactData;
-    private UserLoginData userLoginData;
-    static ArrayList<User> users = new ArrayList<>(); //zmienić na non static
+    static ArrayList<User> users = new ArrayList<>();
     private final Scanner scanner = new Scanner(System.in);
 
     void createUser() {
@@ -18,7 +13,7 @@ public class UserOperations {
         String lastName = scanner.nextLine();
         System.out.print("Nazwisko panieńskie matki: ");
         String mothersMaidenName = scanner.nextLine();
-        userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName);
+        UserPersonalData userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName);
 
         String pesel;
 
@@ -33,16 +28,16 @@ public class UserOperations {
         String phoneNumber = scanner.nextLine();
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
-        address = createAddress();
-        userContactData = new UserContactData(phoneNumber, email, address);
+        Address address = createAddress();
+        UserContactData userContactData = new UserContactData(phoneNumber, email, address);
 
         System.out.print("\nLogin: ");
         String login = scanner.nextLine();
         System.out.print("Hasło: ");
         String password = scanner.nextLine();
-        userLoginData = new UserLoginData(login, password);
+        UserLoginData userLoginData = new UserLoginData(login, password);
 
-        user = new User(userPersonalData, userContactData, userLoginData);
+        User user = new User(userPersonalData, userContactData, userLoginData);
         addUser(user);
         System.out.println("Pomyślnie utworzono użytkownika i dodano do bazy danych!");
     }
