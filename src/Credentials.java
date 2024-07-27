@@ -1,8 +1,8 @@
-public class UserLoginData {
+public class Credentials {
     private String login;
     private String password;
 
-    UserLoginData(String login, String password) {
+    Credentials(String login, String password) {
         this.login = login;
         this.password = password;
     }

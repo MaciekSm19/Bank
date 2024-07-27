@@ -1,9 +1,9 @@
-public class UserContactData {
+public class UserContact {
     private String phoneNumber;
     private String email;
     private final Address address;
 
-    UserContactData(String phoneNumber, String email, Address address) {
+    UserContact(String phoneNumber, String email, Address address) {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
