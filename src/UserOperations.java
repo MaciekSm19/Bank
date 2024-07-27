@@ -29,15 +29,15 @@ public class UserOperations {
         System.out.print("Adres e-mail: ");
         String email = scanner.nextLine();
         Address address = createAddress();
-        UserContact userContactData = new UserContact(phoneNumber, email, address);
+        UserContact userContact = new UserContact(phoneNumber, email, address);
 
         System.out.print("\nLogin: ");
         String login = scanner.nextLine();
         System.out.print("Hasło: ");
         String password = scanner.nextLine();
-        Credentials userLoginData = new Credentials(login, password);
+        Credentials credentials = new Credentials(login, password);
 
-        User user = new User(userPersonalData, userContactData, userLoginData);
+        User user = new User(userPersonalData, userContact, credentials);
         addUser(user);
         System.out.println("Pomyślnie utworzono użytkownika i dodano do bazy danych!");
     }
@@ -86,50 +86,50 @@ public class UserOperations {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Twoje imię: " + user.getUserPersonalData().getFirstName());
+                    System.out.println("Twoje imię: " + user.userPersonalData().getFirstName());
                     System.out.print("Podaj nowe imię: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserPersonalData().setFirstName(valueToSet);
+                    user.userPersonalData().setFirstName(valueToSet);
                     break;
                 case 2:
-                    System.out.println("Twoje nazwisko: " + user.getUserPersonalData().getLastName());
+                    System.out.println("Twoje nazwisko: " + user.userPersonalData().getLastName());
                     System.out.print("Podaj nowe nazwisko: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserPersonalData().setLastName(valueToSet);
+                    user.userPersonalData().setLastName(valueToSet);
                     break;
                 case 3:
-                    System.out.println("Twój numer telefonu: " + user.getUserContactData().getPhoneNumber());
+                    System.out.println("Twój numer telefonu: " + user.userContact().getPhoneNumber());
                     System.out.print("Podaj nowy numer telefonu: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().setPhoneNumber(valueToSet);
+                    user.userContact().setPhoneNumber(valueToSet);
                     break;
                 case 4:
-                    System.out.println("Twój email: " + user.getUserContactData().getEmail());
+                    System.out.println("Twój email: " + user.userContact().getEmail());
                     System.out.print("Podaj nowy email: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().setEmail(valueToSet);
+                    user.userContact().setEmail(valueToSet);
                     break;
                 case 5:
                     editUserAddress(user);
                     break;
                 case 6:
-                    System.out.println("Twój login: " + user.getUserLoginData().getLogin());
+                    System.out.println("Twój login: " + user.credentials().getLogin());
                     System.out.print("Podaj nowy login: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserLoginData().setLogin(valueToSet);
+                    user.credentials().setLogin(valueToSet);
                     break;
                 case 7:
                     String password;
                     do {
                         System.out.print("W celu weryfikacji podaj stare hasło: ");
                         password = scanner.nextLine();
-                        if (!(password.equals(user.getUserLoginData().getPassword())))
+                        if (!(password.equals(user.credentials().getPassword())))
                             System.out.println("Spróbuj ponownie");
 
-                    } while (!(password.equals(user.getUserLoginData().getPassword())));
+                    } while (!(password.equals(user.credentials().getPassword())));
                     System.out.print("Podaj nowe hasło: ");
                     valueToSet = scanner.next();
-                    user.getUserLoginData().setPassword(valueToSet);
+                    user.credentials().setPassword(valueToSet);
                     break;
                 case 8:
                     System.out.println("Wracam do menu");
@@ -159,28 +159,28 @@ public class UserOperations {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Twoje miasto: " + user.getUserContactData().getAddress().getCity());
+                    System.out.println("Twoje miasto: " + user.userContact().getAddress().getCity());
                     System.out.print("Podaj nowe miasto: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAddress().setCity(valueToSet);
+                    user.userContact().getAddress().setCity(valueToSet);
                     break;
                 case 2:
-                    System.out.println("Twoja ulica: " + user.getUserContactData().getAddress().getStreet());
+                    System.out.println("Twoja ulica: " + user.userContact().getAddress().getStreet());
                     System.out.print("Podaj nowa ulice: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAddress().setStreet(valueToSet);
+                    user.userContact().getAddress().setStreet(valueToSet);
                     break;
                 case 3:
-                    System.out.println("Twój numer domu: " + user.getUserContactData().getAddress().getHouseNumber());
+                    System.out.println("Twój numer domu: " + user.userContact().getAddress().getHouseNumber());
                     System.out.print("Podaj nowy numer domu: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAddress().setHouseNumber(valueToSet);
+                    user.userContact().getAddress().setHouseNumber(valueToSet);
                     break;
                 case 4:
-                    System.out.println("Twój kod pocztowy: " + user.getUserContactData().getAddress().getPostalCode());
+                    System.out.println("Twój kod pocztowy: " + user.userContact().getAddress().getPostalCode());
                     System.out.print("Podaj nowy kod pocztowy: ");
                     valueToSet = scanner.nextLine();
-                    user.getUserContactData().getAddress().setPostalCode(valueToSet);
+                    user.userContact().getAddress().setPostalCode(valueToSet);
                     break;
                 case 5:
                     System.out.println("Wychodzę do menu");
@@ -195,28 +195,29 @@ public class UserOperations {
 
     private void getLoginData(User user) {
         System.out.println("\nDane logowania: ");
-        System.out.println("Login: " + user.getUserLoginData().getLogin());
+        System.out.println("Login: " + user.credentials().getLogin());
         System.out.println("Hasło: *********");
     }
 
     private void getUserAddress(User user) {
         System.out.println("\nAdres: ");
-        System.out.println("Miasto: " + user.getUserContactData().getAddress().getCity());
-        System.out.println("Ulica i numer domu: " + user.getUserContactData().getAddress().getStreet() + " " + user.getUserContactData().getAddress().getHouseNumber());
-        System.out.println("Kod pocztowy: " + user.getUserContactData().getAddress().getPostalCode());
+        System.out.println("Miasto: " + user.userContact().getAddress().getCity());
+        System.out.println("Ulica i numer domu: " + user.userContact().getAddress().getStreet() + " " + user.userContact().getAddress().getHouseNumber());
+        System.out.println("Kod pocztowy: " + user.userContact().getAddress().getPostalCode());
     }
 
     private void getUserContactData(User user) {
         System.out.println("\nDane kontaktowe: ");
-        System.out.println("Adres e-mail: " + user.getUserContactData().getEmail());
-        System.out.println("Numer telefonu: " + user.getUserContactData().getPhoneNumber());
+        System.out.println("Adres e-mail: " + user.userContact().getEmail());
+        System.out.println("Numer telefonu: " + user.userContact().getPhoneNumber());
     }
 
     private void getUserPersonalDataInfo(User user) {
         System.out.println("\nDane osobowe: ");
-        System.out.println("Imie i nazwisko: " + user.getUserPersonalData().getFirstName() + " " + user.getUserPersonalData().getLastName());
+        System.out.println("Imie i nazwisko: " + user.userPersonalData().getFirstName() + " " + user.userPersonalData().getLastName());
         System.out.println("Nazwisko panieńskie matki: *************");
-        System.out.println("Data urodzenia: " + user.getUserPersonalData().getDateOfBirth());
+        System.out.println("Data urodzenia: " + user.userPersonalData().getDateOfBirth());
         System.out.println("PESEL: *************");
     }
+
 }

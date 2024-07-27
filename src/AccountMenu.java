@@ -1,9 +1,13 @@
 import java.util.Scanner;
 
 public class AccountMenu {
+    UserOperations userOperations;
+
+    AccountMenu (UserOperations userOperations) {
+        this.userOperations = userOperations;
+    }
     public void accountMenu() {
         Scanner scanner = new Scanner(System.in);
-        UserOperations userOperations = new UserOperations();
 
         boolean loopController = true;
         do {
