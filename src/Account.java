@@ -9,9 +9,9 @@ public class Account {
     }
 
     void withdrawMoney(User user) {
-        System.out.print("Ile pieniędzy chcesz wypłacić? ");
-        double amount = scanner.nextDouble();
         if (checkIfUserExists(user.getUserLoginData().getLogin())) {
+            System.out.print("Ile pieniędzy chcesz wypłacić? ");
+            double amount = scanner.nextDouble();
             if (amount > balance)
                 System.out.println("Odmowa! Masz za malo pieniędzy na koncie (" + balance + " zl), aby wypłacić " + amount + " zl");
             else if (amount <= balance) {
@@ -24,9 +24,9 @@ public class Account {
     }
 
     void depositMoney(User user) {
-        System.out.print("Ile pieniędzy chcesz wpłacić? ");
-        double amount = scanner.nextDouble();
         if (checkIfUserExists(user.getUserLoginData().getLogin())) {
+            System.out.print("Ile pieniędzy chcesz wpłacić? ");
+            double amount = scanner.nextDouble();
             balance += amount;
             System.out.println("Wplata zatwierdzona! Obecny stan konta wynosi: " + balance);
         } else
