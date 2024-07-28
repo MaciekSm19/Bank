@@ -1,9 +1,13 @@
+package account;
+
+import user.UserOperations;
+
 import java.util.Scanner;
 
 public class AccountMenu {
     private final UserOperations userOperations;
 
-    AccountMenu (UserOperations userOperations) {
+    public AccountMenu(UserOperations userOperations) {
         this.userOperations = userOperations;
     }
     public void accountMenu() {

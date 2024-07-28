@@ -1,3 +1,7 @@
+package account;
+
+import user.UserOperations;
+
 import java.util.Scanner;
 import java.math.BigDecimal;
 
@@ -6,7 +10,7 @@ public class Account implements Comparable {
     private BigDecimal balance = new BigDecimal(0);
     private final UserOperations userOperations;
     
-    Account(UserOperations userOperations) {
+    public Account(UserOperations userOperations) {
         this.userOperations = userOperations;
     }
 
@@ -14,7 +18,7 @@ public class Account implements Comparable {
     public int compareTo(Object o) {
         return this.balance.compareTo((BigDecimal) o);
     }
-    void withdrawMoney() {
+    public void withdrawMoney() {
         System.out.print("Ile pieniędzy chcesz wypłacić? ");
         BigDecimal amount = scanner.nextBigDecimal();
         if (balance.compareTo(amount) < 0)
@@ -25,13 +29,13 @@ public class Account implements Comparable {
         } else
             System.out.println("Odmowa! Wystąpił błąd");
     }
-    void depositMoney() {
+    public void depositMoney() {
         System.out.print("Ile pieniędzy chcesz wpłacić? ");
         BigDecimal amount = scanner.nextBigDecimal();
         balance = balance.add(amount);
         System.out.println("Wplata zatwierdzona! Obecny stan konta wynosi: " + balance);
     }
-    boolean loginToAccount() {
+    public boolean loginToAccount() {
         String login;
         String password;
 
@@ -47,7 +51,7 @@ public class Account implements Comparable {
             counter++;
             System.out.print("Podaj Twoje hasło: ");
             password = scanner.nextLine();
-            if (!(password.equals(userOperations.users.get(0).credentials().getPassword()))) {
+            if (!(password.equals(userOperations.users.get(0).credentials().password))) {
                 System.out.println("Hasło jest niepoprawne. Spróbuj jeszcze raz.");
             } else {
                 break;
@@ -57,9 +61,9 @@ public class Account implements Comparable {
                 System.out.println("Liczba prob przekroczona - odmowa dostępu.");
                 break;
             }
-        } while (!(login.equals(userOperations.users.get(0).credentials().getLogin()) && password.equals(userOperations.users.get(0).credentials().getPassword())) || counter < 5);
+        } while (!(login.equals(userOperations.users.get(0).credentials().login) && password.equals(userOperations.users.get(0).credentials().password)) || counter < 5);
 
-        if (login.equals(userOperations.users.get(0).credentials().getLogin()) && password.equals(userOperations.users.get(0).credentials().getPassword())) {
+        if (login.equals(userOperations.users.get(0).credentials().login) && password.equals(userOperations.users.get(0).credentials().password)) {
             System.out.println("Zalogowano pomyślnie");
             return true;
         } else {
@@ -67,6 +71,6 @@ public class Account implements Comparable {
         }
     }
     private boolean checkIfUserExists(String login) {
-        return !userOperations.users.get(0).credentials().getLogin().equals(login);
+        return !userOperations.users.get(0).credentials().login.equals(login);
     }
 }

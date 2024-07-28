@@ -1,11 +1,13 @@
+package user;
+
 import java.time.LocalDate;
 
 public class UserPersonalData {
-    private String firstName;
-    private String lastName;
+    String firstName;
+    String lastName;
+    String peselNumber;
     private final String mothersMaidenName;
     private LocalDate dateOfBirth;
-    private String peselNumber;
 
     UserPersonalData(String firstName, String lastName, String mothersMaidenName) {
         this.firstName = firstName;
@@ -13,6 +15,32 @@ public class UserPersonalData {
         this.mothersMaidenName = mothersMaidenName;
     }
 
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+    void convertPeselToDateOfBirth() {
+        String year = null;
+        String month = null;
+
+        if (Character.getNumericValue(peselNumber.charAt(2)) == 1 || Character.getNumericValue(peselNumber.charAt(2)) == 0) {
+            year = "19" + peselNumber.charAt(0) + peselNumber.charAt(1);
+            month = String.valueOf(peselNumber.charAt(2)) + peselNumber.charAt(3);
+        } else if (Character.getNumericValue(peselNumber.charAt(2)) == 2 || Character.getNumericValue(peselNumber.charAt(2)) == 3) {
+            year = "20" + Character.getNumericValue(peselNumber.charAt(0)) + Character.getNumericValue(peselNumber.charAt(1));
+            month = String.valueOf(Integer.parseInt(String.valueOf(peselNumber.charAt(2)) + String.valueOf(peselNumber.charAt(3))) - 20);
+
+        }
+
+        if (Integer.parseInt(month) < 10)
+            month = "0" + peselNumber.charAt(3);
+
+        String day = String.valueOf(peselNumber.charAt(4)) + peselNumber.charAt(5);
+        if (day != null && month != null && year != null) {
+            dateOfBirth = LocalDate.parse(year + "-" + month + "-" + day);
+            System.out.println("Twoja data urodzin: " + dateOfBirth);
+        } else
+            System.out.println("Wystąpił błąd w konwersji");
+    }
     boolean isValidPesel() {
         int maxDayValue = 28;
         int year = Integer.parseInt(String.valueOf(peselNumber.charAt(0)) + peselNumber.charAt(1));
@@ -50,53 +78,5 @@ public class UserPersonalData {
             return false;
         }
         return isValidLength && isValidMonth && isValidDay;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setPeselNumber(String peselNumber) {
-        this.peselNumber = peselNumber;
-    }
-
-    void convertPeselToDateOfBirth() {
-        String year = null;
-        String month = null;
-
-        if (Character.getNumericValue(peselNumber.charAt(2)) == 1 || Character.getNumericValue(peselNumber.charAt(2)) == 0) {
-            year = "19" + peselNumber.charAt(0) + peselNumber.charAt(1);
-            month = String.valueOf(peselNumber.charAt(2)) + peselNumber.charAt(3);
-        } else if (Character.getNumericValue(peselNumber.charAt(2)) == 2 || Character.getNumericValue(peselNumber.charAt(2)) == 3) {
-            year = "20" + Character.getNumericValue(peselNumber.charAt(0)) + Character.getNumericValue(peselNumber.charAt(1));
-            month = String.valueOf(Integer.parseInt(String.valueOf(peselNumber.charAt(2)) + String.valueOf(peselNumber.charAt(3))) - 20);
-
-        }
-
-        if (Integer.parseInt(month) < 10)
-            month = "0" + peselNumber.charAt(3);
-
-        String day = String.valueOf(peselNumber.charAt(4)) + peselNumber.charAt(5);
-        if (day != null && month != null && year != null) {
-            dateOfBirth = LocalDate.parse(year + "-" + month + "-" + day);
-            System.out.println("Twoja data urodzin: " + dateOfBirth);
-        } else
-            System.out.println("Wystąpił błąd w konwersji");
     }
 }
