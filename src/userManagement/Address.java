@@ -1,6 +1,6 @@
-package user;
+package userManagement;
 
-public class Address {
+class Address {
     String city;
     String street;
     String houseNumber;

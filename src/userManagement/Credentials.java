@@ -1,4 +1,4 @@
-package user;
+package userManagement;
 
 public class Credentials {
     public String login;

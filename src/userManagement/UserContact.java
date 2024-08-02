@@ -1,6 +1,6 @@
-package user;
+package userManagement;
 
-public class UserContact {
+class UserContact {
     String phoneNumber;
     String email;
     private final Address address;

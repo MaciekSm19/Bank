@@ -1,13 +1,13 @@
-package menu;
+package appManagement;
 
-import account.Account;
-import account.AccountMenu;
-import user.*;
+import accountManagement.Account;
+import accountManagement.AccountMenu;
+import userManagement.*;
 
 import java.util.Scanner;
 
-public class Menu {
-    public void menu() {
+class Menu {
+    void menu() {
         Scanner scanner = new Scanner(System.in);
 
         UserOperations userOperations = new UserOperations();

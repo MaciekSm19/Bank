@@ -1,4 +1,4 @@
-package user;
+package userManagement;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,5 +1,4 @@
-package main;
-import menu.Menu;
+package appManagement;
 
 public class Main {
     public static void main(String[] args) {

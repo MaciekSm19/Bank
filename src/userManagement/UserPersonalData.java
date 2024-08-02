@@ -1,8 +1,8 @@
-package user;
+package userManagement;
 
 import java.time.LocalDate;
 
-public class UserPersonalData {
+class UserPersonalData {
     String firstName;
     String lastName;
     String peselNumber;
@@ -15,7 +15,7 @@ public class UserPersonalData {
         this.mothersMaidenName = mothersMaidenName;
     }
 
-    public LocalDate getDateOfBirth() {
+    LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
     void convertPeselToDateOfBirth() {

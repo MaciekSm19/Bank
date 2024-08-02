@@ -1,6 +1,6 @@
-package account;
+package accountManagement;
 
-import user.UserOperations;
+import userManagement.UserOperations;
 
 import java.util.Scanner;
 import java.math.BigDecimal;
