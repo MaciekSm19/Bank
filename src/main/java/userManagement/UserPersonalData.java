@@ -6,8 +6,9 @@ class UserPersonalData {
     String firstName;
     String lastName;
     String peselNumber;
-    private final String mothersMaidenName;
+    private String mothersMaidenName;
     private LocalDate dateOfBirth;
+    UserPersonalData(){}
 
     UserPersonalData(String firstName, String lastName, String mothersMaidenName) {
         this.firstName = firstName;
