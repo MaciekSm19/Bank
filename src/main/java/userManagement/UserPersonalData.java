@@ -19,7 +19,7 @@ class UserPersonalData {
     LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
-    void convertPeselToDateOfBirth() {
+    String convertPeselToDateOfBirth() {
         String year = null;
         String month = null;
 
@@ -29,7 +29,6 @@ class UserPersonalData {
         } else if (Character.getNumericValue(peselNumber.charAt(2)) == 2 || Character.getNumericValue(peselNumber.charAt(2)) == 3) {
             year = "20" + Character.getNumericValue(peselNumber.charAt(0)) + Character.getNumericValue(peselNumber.charAt(1));
             month = String.valueOf(Integer.parseInt(String.valueOf(peselNumber.charAt(2)) + String.valueOf(peselNumber.charAt(3))) - 20);
-
         }
 
         if (Integer.parseInt(month) < 10)
@@ -38,9 +37,9 @@ class UserPersonalData {
         String day = String.valueOf(peselNumber.charAt(4)) + peselNumber.charAt(5);
         if (day != null && month != null && year != null) {
             dateOfBirth = LocalDate.parse(year + "-" + month + "-" + day);
-            System.out.println("Twoja data urodzin: " + dateOfBirth);
+            return "Twoja data urodzin: " + dateOfBirth;
         } else
-            System.out.println("Wystąpił błąd w konwersji");
+            return "Wystąpił błąd w konwersji";
     }
     boolean isValidPesel() {
         int maxDayValue = 28;

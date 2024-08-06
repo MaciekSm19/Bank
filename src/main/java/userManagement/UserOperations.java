@@ -24,7 +24,7 @@ public class UserOperations {
             pesel = scanner.nextLine();
             userPersonalData.peselNumber = pesel;
         } while (!userPersonalData.isValidPesel());
-        userPersonalData.convertPeselToDateOfBirth();
+        System.out.println(userPersonalData.convertPeselToDateOfBirth());
 
         System.out.print("\nNumer telefonu: ");
         String phoneNumber = scanner.nextLine();
