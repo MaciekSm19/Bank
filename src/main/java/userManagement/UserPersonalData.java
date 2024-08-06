@@ -63,8 +63,8 @@ class UserPersonalData {
             maxDayValue = 30;
 
         boolean isValidLength = peselNumber.length() == 11;
-        boolean isValidMonth = Character.getNumericValue(peselNumber.charAt(2)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(2)) == 0 || Character.getNumericValue(peselNumber.charAt(2)) == 1) && Character.getNumericValue(peselNumber.charAt(3)) <= 2) || (Character.getNumericValue(peselNumber.charAt(2)) >= 0 || Character.getNumericValue(peselNumber.charAt(3)) == 2));
-        boolean isValidDay = (Character.getNumericValue(peselNumber.charAt(4)) <= 3 && ((Character.getNumericValue(peselNumber.charAt(4)) == 3) && (Character.getNumericValue(peselNumber.charAt(5)) == 0) || Character.getNumericValue(peselNumber.charAt(5)) == 1) || ((Character.getNumericValue(peselNumber.charAt(4)) <= 2) && Character.getNumericValue(peselNumber.charAt(5)) >= 0)) && day <= maxDayValue;
+        boolean isValidMonth = Character.getNumericValue(peselNumber.charAt(2)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(2)) == 0 || Character.getNumericValue(peselNumber.charAt(2)) == 1) && Character.getNumericValue(peselNumber.charAt(3)) <= 2) || (Character.getNumericValue(peselNumber.charAt(2)) >= 0 || Character.getNumericValue(peselNumber.charAt(3)) == 2)) && !(Character.getNumericValue(peselNumber.charAt(2)) == 0 && Character.getNumericValue(peselNumber.charAt(3)) == 0);
+        boolean isValidDay = (Character.getNumericValue(peselNumber.charAt(4)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(4)) == 3) && (Character.getNumericValue(peselNumber.charAt(5)) == 0) || Character.getNumericValue(peselNumber.charAt(5)) == 1) || ((Character.getNumericValue(peselNumber.charAt(4)) <= 2) && Character.getNumericValue(peselNumber.charAt(5)) >= 0))) && !(Character.getNumericValue(peselNumber.charAt(4)) == 0 && Character.getNumericValue(peselNumber.charAt(5)) == 0) && day <= maxDayValue;
 
         if (!isValidLength) {
             System.out.println("Długość numeru PESEL jest niepoprawna. Spróbuj jeszcze raz.");
