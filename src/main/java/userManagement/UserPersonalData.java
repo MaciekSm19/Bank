@@ -65,18 +65,6 @@ class UserPersonalData {
         boolean isValidMonth = Character.getNumericValue(peselNumber.charAt(2)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(2)) == 0 || Character.getNumericValue(peselNumber.charAt(2)) == 1) && Character.getNumericValue(peselNumber.charAt(3)) <= 2) || (Character.getNumericValue(peselNumber.charAt(2)) >= 0 || Character.getNumericValue(peselNumber.charAt(3)) == 2)) && !(Character.getNumericValue(peselNumber.charAt(2)) == 0 && Character.getNumericValue(peselNumber.charAt(3)) == 0);
         boolean isValidDay = (Character.getNumericValue(peselNumber.charAt(4)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(4)) == 3) && (Character.getNumericValue(peselNumber.charAt(5)) == 0) || Character.getNumericValue(peselNumber.charAt(5)) == 1) || ((Character.getNumericValue(peselNumber.charAt(4)) <= 2) && Character.getNumericValue(peselNumber.charAt(5)) >= 0))) && !(Character.getNumericValue(peselNumber.charAt(4)) == 0 && Character.getNumericValue(peselNumber.charAt(5)) == 0) && day <= maxDayValue;
 
-        if (!isValidLength) {
-            System.out.println("Długość numeru PESEL jest niepoprawna. Spróbuj jeszcze raz.");
-            return false;
-        }
-        if (!isValidMonth) {
-            System.out.println("3 lub 4 (zapis miesiąca urodzenia) cyfra numeru PESEL jest niepoprawna. Spróbuj jeszcze raz.");
-            return false;
-        }
-        if (!isValidDay) {
-            System.out.println("5 lub 6 (zapis dnia urodzenia) cyfra numeru PESEL jest niepoprawna. Spróbuj jeszcze raz.");
-            return false;
-        }
         return isValidLength && isValidMonth && isValidDay;
     }
 }

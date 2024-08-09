@@ -23,6 +23,8 @@ public class UserOperations {
             System.out.print("PESEL (11 cyfr): ");
             pesel = scanner.nextLine();
             userPersonalData.peselNumber = pesel;
+            if(!userPersonalData.isValidPesel())
+                System.out.println("Pesel jest niepoprawny! Spróbuj ponownie");
         } while (!userPersonalData.isValidPesel());
         System.out.println(userPersonalData.convertPeselToDateOfBirth());
 
