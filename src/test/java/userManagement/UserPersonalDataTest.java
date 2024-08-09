@@ -7,338 +7,152 @@ class UserPersonalDataTest {
     private UserPersonalData userPersonalData;
     private boolean isValid;
 
-    @Test
-    void testIsValidPeselCorrectPeselXXCentury() {
+    void assertValid(String value) {
         userPersonalData = new UserPersonalData();
 
-        userPersonalData.peselNumber = "50123100000";
+        userPersonalData.peselNumber = value;
         isValid = userPersonalData.isValidPesel();
+
         Assertions.assertTrue(isValid);
+    }
+
+    void assertInvalid(String value) {
+        userPersonalData = new UserPersonalData();
+
+        userPersonalData.peselNumber = value;
+        isValid = userPersonalData.isValidPesel();
+
+        Assertions.assertFalse(isValid);
+    }
+
+    @Test
+    void testIsValidPeselCorrectPeselXXCentury() {
+        assertValid("50123100000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselLengthXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "52022900000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("52022900000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselLengthXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "520229000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("520229000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselLeapYearXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "52022900000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("52022900000");
     }
 
     @Test
-    void testIsValidPeselCorrectPeselNotLeapYearXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50022900000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+    void testIsValidPeselIncorrectPeselNotLeapYearXXCentury() {
+        assertInvalid("50022900000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMaximumDays31XXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50123100000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("50123100000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMaximumDays31XXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "500123200000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("500123200000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMaximumDays30XXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50043000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("50043000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMaximumDays30XXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50043100000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("50043100000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMonthValueXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50043000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("50043000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMonthValueXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50000100000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("50000100000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselDayValueXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50041200000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("50041200000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselDayValueXXCentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "50040000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("50040000000");
     }
 
 
     @Test
     void testIsValidPeselCorrectPeselXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02243000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02243000000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselLengthXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02243000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02243000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselLengthXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02243000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("02243000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselLeapYearXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "04222900000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("04222900000");
     }
 
     @Test
-    void testIsValidPeselCorrectPeselNotLeapYearXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02222900000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+    void testIsValidPeselIncorrectPeselNotLeapYearXXICentury() {
+        assertInvalid("02222900000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMaximumDays31XXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02213100000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02213100000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMaximumDays31XXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02213200000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("02213200000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMaximumDays30XXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02243000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02243000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMaximumDays30XXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02243100000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("02243100000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselMonthValueXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02313000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02313000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselMonthValueXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02203000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("02203000000");
     }
 
     @Test
     void testIsValidPeselCorrectPeselDayValueXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02253000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertTrue(isValid);
+        assertValid("02253000000");
     }
 
     @Test
     void testIsValidPeselIncorrectPeselDayValueXXICentury() {
-        //Given
-        userPersonalData = new UserPersonalData();
-
-        //When
-        userPersonalData.peselNumber = "02259000000";
-        isValid = userPersonalData.isValidPesel();
-
-        //Then
-        Assertions.assertFalse(isValid);
+        assertInvalid("02259000000");
     }
 }
