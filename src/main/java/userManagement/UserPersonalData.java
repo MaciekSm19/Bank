@@ -42,29 +42,32 @@ class UserPersonalData {
             return "Wystąpił błąd w konwersji";
     }
     boolean isValidPesel() {
-        int maxDayValue = 28;
-        int year = Integer.parseInt(String.valueOf(peselNumber.charAt(0)) + peselNumber.charAt(1));
-        int month = Integer.parseInt(String.valueOf(peselNumber.charAt(2)) + peselNumber.charAt(3));
-        int day = Integer.parseInt(String.valueOf(peselNumber.charAt(4)) + peselNumber.charAt(5));
-
-        if (month == 2 || month == 22) {
-            if (year % 4 == 0)
-                maxDayValue = 29;
-            else
-                maxDayValue = 28;
-        } else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 1)
-            maxDayValue = 31;
-        else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 0)
-            maxDayValue = 30;
-        else if (((month >= 8 && month <= 12) || month >= 28) && month % 2 == 0)
-            maxDayValue = 31;
-        else if (((month >= 8 && month <= 12) || month >= 28) && month % 2 == 1)
-            maxDayValue = 30;
-
         boolean isValidLength = peselNumber.length() == 11;
-        boolean isValidMonth = Character.getNumericValue(peselNumber.charAt(2)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(2)) == 0 || Character.getNumericValue(peselNumber.charAt(2)) == 1) && Character.getNumericValue(peselNumber.charAt(3)) <= 2) || (Character.getNumericValue(peselNumber.charAt(2)) >= 0 || Character.getNumericValue(peselNumber.charAt(3)) == 2)) && !(Character.getNumericValue(peselNumber.charAt(2)) == 0 && Character.getNumericValue(peselNumber.charAt(3)) == 0);
-        boolean isValidDay = (Character.getNumericValue(peselNumber.charAt(4)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(4)) == 3) && (Character.getNumericValue(peselNumber.charAt(5)) == 0) || Character.getNumericValue(peselNumber.charAt(5)) == 1) || ((Character.getNumericValue(peselNumber.charAt(4)) <= 2) && Character.getNumericValue(peselNumber.charAt(5)) >= 0))) && !(Character.getNumericValue(peselNumber.charAt(4)) == 0 && Character.getNumericValue(peselNumber.charAt(5)) == 0) && day <= maxDayValue;
 
-        return isValidLength && isValidMonth && isValidDay;
+        if (isValidLength) {
+            int maxDayValue = 28;
+            int year = Integer.parseInt(String.valueOf(peselNumber.charAt(0)) + peselNumber.charAt(1));
+            int month = Integer.parseInt(String.valueOf(peselNumber.charAt(2)) + peselNumber.charAt(3));
+            int day = Integer.parseInt(String.valueOf(peselNumber.charAt(4)) + peselNumber.charAt(5));
+
+            if (month == 2 || month == 22) {
+                if (year % 4 == 0)
+                    maxDayValue = 29;
+                else
+                    maxDayValue = 28;
+            } else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 1)
+                maxDayValue = 31;
+            else if ((month <= 7 || (month <= 27 && month >= 21)) && month % 2 == 0)
+                maxDayValue = 30;
+            else if (((month >= 8 && month <= 12) || month >= 28) && month % 2 == 0)
+                maxDayValue = 31;
+            else if (((month >= 8 && month <= 12) || month >= 28) && month % 2 == 1)
+                maxDayValue = 30;
+
+            boolean isValidMonth = Character.getNumericValue(peselNumber.charAt(2)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(2)) == 0 || Character.getNumericValue(peselNumber.charAt(2)) == 1) && Character.getNumericValue(peselNumber.charAt(3)) <= 2) || (Character.getNumericValue(peselNumber.charAt(2)) >= 0 || Character.getNumericValue(peselNumber.charAt(3)) == 2)) && !(Character.getNumericValue(peselNumber.charAt(2)) == 0 && Character.getNumericValue(peselNumber.charAt(3)) == 0);
+            boolean isValidDay = (Character.getNumericValue(peselNumber.charAt(4)) <= 3 && (((Character.getNumericValue(peselNumber.charAt(4)) == 3) && (Character.getNumericValue(peselNumber.charAt(5)) == 0) || Character.getNumericValue(peselNumber.charAt(5)) == 1) || ((Character.getNumericValue(peselNumber.charAt(4)) <= 2) && Character.getNumericValue(peselNumber.charAt(5)) >= 0))) && !(Character.getNumericValue(peselNumber.charAt(4)) == 0 && Character.getNumericValue(peselNumber.charAt(5)) == 0) && day <= maxDayValue;
+            return isValidLength && isValidMonth && isValidDay;
+        } else
+            return false;
     }
 }
