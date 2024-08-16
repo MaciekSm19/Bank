@@ -28,6 +28,29 @@ class UserPersonalDataTest {
     }
 
     @Test
+    void testIsValidPeselIncorrectEmptyPesel() {
+        assertInvalidPesel("");
+    }
+
+    @Test
+    void testIsValidPeselIncorrectBlankPesel() {
+        assertInvalidPesel("  ");
+        assertInvalidPesel(" ");
+    }
+
+    @Test
+    void testIsValidPeselIncorrectNullPesel() {
+        assertInvalidPesel(null);
+    }
+
+    @Test
+    void testIsValidPeselIsPeselContainsOnlyDigitsIncorrectPesel() {
+        assertInvalidPesel("peselPesel");
+        assertInvalidPesel("p3s3lP3s3l");
+        assertInvalidPesel("5012310000P");
+    }
+
+    @Test
     void testIsValidPeselCorrectPeselXXCentury() {
         assertValidPesel("50123100000");
         assertValidPesel("99022800000");
