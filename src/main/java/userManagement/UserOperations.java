@@ -1,27 +1,28 @@
 package userManagement;
 
+import appManagement.ConsoleInput;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UserOperations {
     public ArrayList<User> users = new ArrayList<>();
-    private final Scanner scanner = new Scanner(System.in);
+    private final ConsoleInput consoleInput = new ConsoleInput(System.in);
 
     public void createUser() {
         System.out.println("\nWitaj w kreatorze użytkownika. Musisz podać niezbędne dane, aby zarejestrować sie w aplikacji banku.\n");
         System.out.print("Imię: ");
-        String firstName = scanner.nextLine();
+        String firstName = consoleInput.getStringInput();
         System.out.print("Nazwisko: ");
-        String lastName = scanner.nextLine();
+        String lastName =  consoleInput.getStringInput();
         System.out.print("Nazwisko panieńskie matki: ");
-        String mothersMaidenName = scanner.nextLine();
+        String mothersMaidenName =  consoleInput.getStringInput();
         UserPersonalData userPersonalData = new UserPersonalData(firstName, lastName, mothersMaidenName);
 
         String pesel;
 
         do {
             System.out.print("PESEL (11 cyfr): ");
-            pesel = scanner.nextLine();
+            pesel =  consoleInput.getStringInput();
             userPersonalData.peselNumber = pesel;
             if(!userPersonalData.isValidPesel())
                 System.out.println("Pesel jest niepoprawny! Spróbuj ponownie");
@@ -29,16 +30,16 @@ public class UserOperations {
         System.out.println(userPersonalData.convertPeselToDateOfBirth());
 
         System.out.print("\nNumer telefonu: ");
-        String phoneNumber = scanner.nextLine();
+        String phoneNumber =  consoleInput.getStringInput();
         System.out.print("Adres e-mail: ");
-        String email = scanner.nextLine();
+        String email =  consoleInput.getStringInput();
         Address address = createAddress();
         UserContact userContact = new UserContact(phoneNumber, email, address);
 
         System.out.print("\nLogin: ");
-        String login = scanner.nextLine();
+        String login =  consoleInput.getStringInput();
         System.out.print("Hasło: ");
-        String password = scanner.nextLine();
+        String password =  consoleInput.getStringInput();
         Credentials credentials = new Credentials(login, password);
 
         User user = new User(userPersonalData, userContact, credentials);
@@ -65,33 +66,32 @@ public class UserOperations {
             System.out.println("7. Hasło.");
             System.out.println("8. Wróć do menu.");
             System.out.print("Twój wybór: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = consoleInput.getIntInput();
             String valueToSet;
 
             switch (choice) {
                 case 1:
                     System.out.println("Twoje imię: " + user.userPersonalData().firstName);
                     System.out.print("Podaj nowe imię: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userPersonalData().firstName = valueToSet;
                     break;
                 case 2:
                     System.out.println("Twoje nazwisko: " + user.userPersonalData().lastName);
                     System.out.print("Podaj nowe nazwisko: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userPersonalData().lastName = valueToSet;
                     break;
                 case 3:
                     System.out.println("Twój numer telefonu: " + user.userContact().phoneNumber);
                     System.out.print("Podaj nowy numer telefonu: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().phoneNumber = valueToSet;
                     break;
                 case 4:
                     System.out.println("Twój email: " + user.userContact().email);
                     System.out.print("Podaj nowy email: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().email = valueToSet;
                     break;
                 case 5:
@@ -100,20 +100,20 @@ public class UserOperations {
                 case 6:
                     System.out.println("Twój login: " + user.credentials().login);
                     System.out.print("Podaj nowy login: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.credentials().login = valueToSet;
                     break;
                 case 7:
                     String password;
                     do {
                         System.out.print("W celu weryfikacji podaj stare hasło: ");
-                        password = scanner.nextLine();
+                        password =  consoleInput.getStringInput();
                         if (!(password.equals(user.credentials().login)))
                             System.out.println("Spróbuj ponownie");
 
                     } while (!(password.equals(user.credentials().password)));
                     System.out.print("Podaj nowe hasło: ");
-                    valueToSet = scanner.next();
+                    valueToSet = consoleInput.getStringInput();
                     user.credentials().password = valueToSet;
                     break;
                 case 8:
@@ -128,13 +128,13 @@ public class UserOperations {
     }
     private Address createAddress() {
         System.out.print("\nMiejscowość: ");
-        String city = scanner.nextLine();
+        String city =  consoleInput.getStringInput();
         System.out.print("Ulica: ");
-        String street = scanner.nextLine();
+        String street =  consoleInput.getStringInput();
         System.out.print("Numer domu: ");
-        String houseNumber = scanner.nextLine();
+        String houseNumber =  consoleInput.getStringInput();
         System.out.print("Kod pocztowy: ");
-        String postalCode = scanner.nextLine();
+        String postalCode =  consoleInput.getStringInput();
 
         return new Address(city, street, houseNumber, postalCode);
     }
@@ -152,33 +152,33 @@ public class UserOperations {
             System.out.println("4. Kod pocztowy.");
             System.out.println("5. Wróć do menu edycji.");
             System.out.print("Twój wybór: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = consoleInput.getIntInput();
+             consoleInput.getStringInput();
             String valueToSet;
 
             switch (choice) {
                 case 1:
                     System.out.println("Twoje miasto: " + user.userContact().getAddress().city);
                     System.out.print("Podaj nowe miasto: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().getAddress().city = valueToSet;
                     break;
                 case 2:
                     System.out.println("Twoja ulica: " + user.userContact().getAddress().street);
                     System.out.print("Podaj nowa ulice: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().getAddress().street = valueToSet;
                     break;
                 case 3:
                     System.out.println("Twój numer domu: " + user.userContact().getAddress().houseNumber);
                     System.out.print("Podaj nowy numer domu: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().getAddress().houseNumber = valueToSet;
                     break;
                 case 4:
                     System.out.println("Twój kod pocztowy: " + user.userContact().getAddress().postalCode);
                     System.out.print("Podaj nowy kod pocztowy: ");
-                    valueToSet = scanner.nextLine();
+                    valueToSet =  consoleInput.getStringInput();
                     user.userContact().getAddress().postalCode = valueToSet;
                     break;
                 case 5:
