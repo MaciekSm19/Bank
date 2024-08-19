@@ -1,12 +1,12 @@
 package accountManagement;
 
+import appManagement.ConsoleInput;
 import userManagement.UserOperations;
 
-import java.util.Scanner;
 import java.math.BigDecimal;
 
 public class Account implements Comparable {
-    private final Scanner scanner = new Scanner(System.in);
+    private final ConsoleInput consoleInput = new ConsoleInput(System.in);
     private BigDecimal balance = new BigDecimal(0);
     private final UserOperations userOperations;
     
@@ -20,7 +20,7 @@ public class Account implements Comparable {
     }
     public void withdrawMoney() {
         System.out.print("Ile pieniędzy chcesz wypłacić? ");
-        BigDecimal amount = scanner.nextBigDecimal();
+        BigDecimal amount = consoleInput.getBigDecimalInput();
         if (balance.compareTo(amount) < 0)
             System.out.println("Odmowa! Masz za malo pieniędzy na koncie (" + balance + " zl), aby wypłacić " + amount + " zl");
         else if (balance.compareTo(amount) >= 0) {
@@ -31,7 +31,7 @@ public class Account implements Comparable {
     }
     public void depositMoney() {
         System.out.print("Ile pieniędzy chcesz wpłacić? ");
-        BigDecimal amount = scanner.nextBigDecimal();
+        BigDecimal amount = consoleInput.getBigDecimalInput();
         balance = balance.add(amount);
         System.out.println("Wplata zatwierdzona! Obecny stan konta wynosi: " + balance);
     }
@@ -41,7 +41,7 @@ public class Account implements Comparable {
 
         do {
             System.out.print("Podaj Twój login: ");
-            login = scanner.nextLine();
+            login =  consoleInput.getStringInput();
             if (checkIfUserExists(login))
                 System.out.println("Nie znaleziono takiego użytkownika. Spróbuj ponownie.");
         } while (checkIfUserExists(login));
@@ -50,7 +50,7 @@ public class Account implements Comparable {
         do {
             counter++;
             System.out.print("Podaj Twoje hasło: ");
-            password = scanner.nextLine();
+            password =  consoleInput.getStringInput();
             if (!(password.equals(userOperations.users.get(0).credentials().password))) {
                 System.out.println("Hasło jest niepoprawne. Spróbuj jeszcze raz.");
             } else {

@@ -1,8 +1,7 @@
 package accountManagement;
 
+import appManagement.ConsoleInput;
 import userManagement.UserOperations;
-
-import java.util.Scanner;
 
 public class AccountMenu {
     private final UserOperations userOperations;
@@ -11,8 +10,7 @@ public class AccountMenu {
         this.userOperations = userOperations;
     }
     public void accountMenu() {
-        Scanner scanner = new Scanner(System.in);
-
+        ConsoleInput consoleInput = new ConsoleInput(System.in);
         boolean loopController = true;
         do {
             System.out.println("\nWitaj w menu konta. Co chcesz zrobić?");
@@ -20,7 +18,7 @@ public class AccountMenu {
             System.out.println("2. Edytuj dane.");
             System.out.println("3. Wyjdź do menu głównego.");
             System.out.print("Twój wybór: ");
-            int choice = scanner.nextInt();
+            int choice = consoleInput.getIntInput();
 
             switch (choice) {
                 case 1:

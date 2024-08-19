@@ -4,11 +4,9 @@ import accountManagement.Account;
 import accountManagement.AccountMenu;
 import userManagement.*;
 
-import java.util.Scanner;
-
 class Menu {
     void menu() {
-        Scanner scanner = new Scanner(System.in);
+        ConsoleInput consoleInput = new ConsoleInput(System.in);
 
         UserOperations userOperations = new UserOperations();
         userOperations.createUser();
@@ -29,7 +27,7 @@ class Menu {
                 System.out.println("3. Konto.");
                 System.out.println("4. Wyjdź z aplikacji.");
                 System.out.print("Twój wybór: ");
-                int choice = scanner.nextInt();
+                int choice = consoleInput.getIntInput();
 
                 switch (choice) {
                     case 1:
