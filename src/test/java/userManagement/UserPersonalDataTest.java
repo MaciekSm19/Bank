@@ -1,6 +1,6 @@
 package userManagement;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ class UserPersonalDataTest {
         userPersonalData.peselNumber = pesel;
         isValid = userPersonalData.isValidPesel();
 
-        Assertions.assertTrue(isValid);
+        assertTrue(isValid);
     }
 
     void assertInvalidPesel(String pesel) {
@@ -24,7 +24,7 @@ class UserPersonalDataTest {
         userPersonalData.peselNumber = pesel;
         isValid = userPersonalData.isValidPesel();
 
-        Assertions.assertFalse(isValid);
+        assertFalse(isValid);
     }
 
     @Test
@@ -237,7 +237,7 @@ class UserPersonalDataTest {
         userPersonalData.peselNumber = pesel;
         userPersonalData.convertPeselToDateOfBirth();
 
-        Assertions.assertEquals(userPersonalData.getDateOfBirth(), expectedDate);
+        assertEquals(userPersonalData.getDateOfBirth(), expectedDate);
     }
 
     @Test
